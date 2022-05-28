@@ -1,4 +1,4 @@
-my_packages = c("tidymodels", "data.table")
+my_packages = c("tidymodels", "data.table","shinny")
 
 install_if_missing = function(p) {
   if (p %in% rownames(installed.packages()) == FALSE) {
