@@ -3,7 +3,7 @@
 library(shiny)
 library(dplyr)
 
-                                                  
+df<-read.csv("houses_to_rent_clear.csv",sep=";")
 
 
 model<-readRDS("lm_model_houses.rds")
