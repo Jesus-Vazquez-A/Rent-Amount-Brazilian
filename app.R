@@ -3,11 +3,10 @@
 library(shiny)
 library(dplyr)
 
+                                                  
 
-df<-read.csv("C:\\Users\\amado\\Desktop\\Portafolio Remaster\\houses_to_rent_clear.csv",sep=";")
 
-model<-readRDS("C:\\Users\\amado\\Desktop\\Portafolio Remaster\\lm_model_houses.rds")
-
+model<-readRDS("lm_model_houses.rds")
 ui <- pageWithSidebar(
     
     # Page header
