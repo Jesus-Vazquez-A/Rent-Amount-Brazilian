@@ -1,4 +1,4 @@
-df<-read.csv("houses",sep=";")
+df<-read.csv("houses_to_rent_clear.csv",sep=";")
 server<- function(input, output, session) {
     
     # Input Data
