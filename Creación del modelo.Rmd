@@ -1,0 +1,118 @@
+---
+title: "Creación de modelo lineal"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+## Cargamos las librerias a utilizar
+
+```{r message=FALSE, warning=FALSE}
+library(tidymodels) # Nos permitira crear el algoritmo de regresión lineal.
+library(dplyr) # Manipulación de datos.
+library(ggplot2) # Gráficar.
+library(caret) # Usaremos para las métricas de desempeño.
+```
+
+## Cargamos la base de datos limpia.
+
+
+
+```{r message=FALSE, warning=FALSE}
+df<-read.csv("houses_to_rent_clear.csv",sep=";")
+```
+
+## Preprocesado de los datos.
+
+```{r message=FALSE, warning=FALSE}
+df<- df %>%
+  mutate(animal=ifelse(animal=="acept",1,0),
+         furniture=ifelse(furniture=="furnished",1,0))
+# Transfromamos las variables cetegoricas a numérica.
+```
+
+```{r}
+df_scale<- df %>%
+  mutate(rooms=as.numeric(scale(rooms)),
+         bathroom=as.numeric(scale(bathroom)),
+         parking.spaces=as.numeric(scale(parking.spaces)),
+         floor=as.numeric(scale(floor))
+         )
+# Realizamos un rescalado de los datos. Para que pueda ser comparables entre si.
+```
+
+
+## Dividimos los datos de entrenamiento y validación.
+
+```{r}
+set.seed(2018) 
+
+split<-initial_split(df_scale,prop = 0.8,
+                     strata = rent.amount) # Dividimos los datos un 80% para entrenaar y el resto para validación.
+
+training_data<-split %>%
+  training() # Seleccionamos los datos de entrenamiento.
+
+test_data<-split %>%
+  testing() # Seleccionamos los datos de validación.
+  
+```
+
+
+## Creación del modelo de regresión lineal.
+
+```{r}
+lm_model<-linear_reg() %>%
+  fit(rent.amount~.,data=training_data)
+```
+
+```{r}
+test_results <- predict(lm_model, new_data = test_data) %>% 
+                            bind_cols(test_data)
+    
+```
+
+
+
+$R^2$ 
+
+Es una métrica de desempeño. Que mide el grado de covarianza entre el valor predicho y el valor actual.
+Entre más cercano sea a 1 mayor será la cercanía a los valores originales.
+
+
+```{r}
+R2(predict(lm_model,training_data),training_data$rent.amount)
+```
+
+
+
+```{r}
+R2(test_results$.pred,test_results$rent.amount)
+```
+Observamos el $R^2$ bastante alto. Tanto para los datos de entrenamiento y validación.
+
+Por cual puede explicar el modelo la mayoría de los datos. Lo cual generalizar bien.
+
+
+
+### Representación gráfica.
+
+
+
+```{r}
+test_results %>%
+  mutate(.pred=exp(.pred),rent.amount=exp(rent.amount)) %>%
+  ggplot(aes(x=.pred,y=rent.amount)) +
+  geom_point(color="green") +
+ 
+  geom_abline(intercept = 0, slope = 1, color = 'orange') +
+  labs(title = "Linear Regression Results") +
+  xlab("Predicted values") +
+  ylab("True values")
+```
+## Guardamos el modelo.
+
+
+```{r}
+saveRDS(lm_model , "lm_model_houses.rds " )
+```
+
