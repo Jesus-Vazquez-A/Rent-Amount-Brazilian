@@ -1,0 +1,254 @@
+---
+title: "Limpieza de datos y an�lisis exploratorio"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+### Importación de libreras.
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2) # Gráficos
+library(dplyr)# Manipulación del dataset
+library(gridExtra)# Crear matriz de gráficos
+```
+
+### Cargamos la base de datos.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+df<-read.csv("houses_to_rent.csv")
+# Usamos la función read.csv para leer el archivo en fromato csv.
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+names(df)
+```
+### Selección de variables.
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+df <- df %>% select(rent.amount,
+                           fire.insurance,
+                           city,
+                           area,
+                           rooms,
+                           bathroom,
+                           parking.spaces,
+                           floor,
+                           animal,
+                           furniture)
+# Con la libreria dplyr usamos la función select. Con el objetivo de 
+# seleccionar las variables que probablemente sean significativaspara
+# nuestra variable objetivo.
+```
+
+### Resumen rápido del dataframe.
+
+```{r}
+summary(df)
+```
+
+Las variables que son numéricas las muestra como si fueran tipo carácter. Debido a que cuentan con carácteres
+especiales. Que impiden que se conideren como valores numéricos. Por lo cual tendremos que limpiar las variables como el **precio de la renta mensual**. **El seguro contra incendios**. Así como la cantidad de **pisos** del departamento.
+
+### Eliminación de carácteres especiales.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ eliminate_special_char<-function(name_var){
+   
+   return(gsub("[//R$,]", "",name_var)) # Removemos los carácteres que no sean numéricos.
+   
+ }
+
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+df<-df %>%
+  mutate(rent.amount=eliminate_special_char(rent.amount),
+         fire.insurance=eliminate_special_char(fire.insurance))
+
+# Hacemos uso de la función mutate para realizar un cambio a las variables.
+```
+
+### Tranfromación a variable numérica.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+tf_num<-function(name_var){
+  
+  return(as.numeric(name_var)) # Realizamos la tranformación a variables numéricas.
+}
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+df<- df %>%
+  mutate(rent.amount=tf_num(rent.amount),
+        fire.insurance=tf_num(fire.insurance)
+         )
+```
+
+
+```{r}
+unique(df$floor)
+```
+
+Observamos los valores únicos. Marca un carácter del tipo cadena "-". Por lo cual indica que el departamento sólo cuenta con un piso.
+
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+df<-df %>%
+  mutate(floor=ifelse(floor=="-",0,floor), 
+         floor=tf_num(floor)) 
+
+# Indicamos que los valores con el carácter "-". Les pondrá un cero. Casa contrario los dejara igual.
+# Realizamos la tranformación a tipo numérica.
+```
+
+
+```{r echo=FALSE}
+df %>%
+  select_if(is.numeric) %>%
+  summary()
+```
+
+Observamos que exitosamente realizamos la transformación numérica.
+
+
+```{r echo=FALSE}
+scatter_plot<-function(x_var,x_name){
+
+    ggplot(df,aes(x=x_var,y=rent.amount)) +
+    
+    geom_point(color="green") +
+    geom_smooth(method = "lm",color="red") +
+    theme_dark() +
+    xlab(x_name) +
+    ylab("Rent amount")
+    
+
+}
+
+# Creamos una función que nos permitera crear gráficas de dispersión.
+
+```
+
+## Limpieza de datos.
+
+
+
+
+```{r}
+grid.arrange(
+  scatter_plot(df$fire.insurance,"Fire insurence"),
+  scatter_plot(df$area,"Area"),
+  scatter_plot(df$rooms,"Rooms")
+  
+)
+```
+
+
+
+
+```{r}
+df<-df %>%
+  
+  mutate(rent.amount=ifelse(rent.amount>15000,15000,rent.amount)) %>% 
+  mutate(area=ifelse(area>1000,1000,area)) %>%
+  mutate(fire.insurance=ifelse(fire.insurance>250,250,fire.insurance)) %>%
+  mutate(fire.insurance=ifelse(fire.insurance<5,5,fire.insurance)) %>%
+  mutate(rooms=ifelse(rooms>7,7,rooms)) 
+
+
+```
+
+Reemplazamos los valores atípicos por valores normales.
+
+
+
+```{r}
+grid.arrange(
+  scatter_plot(df$fire.insurance,"Fire insurence"),
+  scatter_plot(df$area,"Area"),
+  scatter_plot(df$rooms,"Rooms")
+  
+)
+
+```
+
+
+
+
+```{r}
+grid.arrange(scatter_plot(df$bathroom,"Bathroom"),
+             scatter_plot(df$parking.spaces,"Parking Spaces"),
+             scatter_plot(df$floor,"Floor"))
+```
+
+```{r}
+df<-df %>%
+  
+  mutate(bathroom=ifelse(bathroom>7,7,bathroom)) %>% 
+  mutate(parking.spaces=ifelse(parking.spaces>10,8,parking.spaces)) %>%
+  mutate(floor=ifelse(floor>30,30,floor)) 
+
+
+```
+
+Reemplazamos los valores que se salen de lo normal. Por valores normales.
+
+
+
+```{r}
+grid.arrange(scatter_plot(df$bathroom,"Bathroom"),
+             scatter_plot(df$parking.spaces,"Parking Spaces"),
+             scatter_plot(df$floor,"Floor"))
+
+```
+
+```{r}
+box_plot<-function(x_var,x_name,title){
+
+    ggplot(df,aes(x=x_var)) +
+    geom_boxplot(color="green") +
+    theme_light() +
+    xlab(x_name)+
+    labs(title = title)
+}
+```
+### Transformación logaritmica.
+
+Realizamos dicha transformación para poder mejorar la distribución de los datos.
+
+```{r}
+grid.arrange(box_plot(df$fire.insurance,"Fire insurence","Normal"),
+             box_plot(log(df$fire.insurance),"Fire insurance","Transformación logaritmica"))
+
+```
+
+```{r}
+grid.arrange(box_plot(df$rent.amount,"Rent amount","Normal"),
+             box_plot(log(df$rent.amount),"Rent amount","Transformación logaritmica"))
+```
+
+```{r}
+grid.arrange(box_plot(df$area,"Area","Normal"),
+             box_plot(log(df$area),"Area","Transformación logaritmica"))
+```
+```{r}
+df<- df %>%
+  mutate(rent.amount=log(rent.amount),
+         area=log(area),
+         fire.insurance=log(fire.insurance))
+```
+
+
+# Guardamos la base de datos limpia.
+
+```{r message=FALSE, warning=FALSE}
+write.table(df,file = "houses_to_rent_clear.csv",sep=";",row.names = F)
+```
+
+
+
