@@ -19,3 +19,7 @@ The project is divided into 3.
 The first two steps will be presented in pdf format. So that you can see the graphs of the variables.
 
 The city variable is 1 when the house is in a metropolis. Otherwise, it will put a 1.
+
+### Link app
+
+https://monto-alquiler-brasileño.shinyapps.io/monto-alquiler-brasil/
