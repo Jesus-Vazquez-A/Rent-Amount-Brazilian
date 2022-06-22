@@ -20,6 +20,10 @@ The first two steps will be presented in pdf format. So that you can see the gra
 
 The city variable is 1 when the house is in a metropolis. Otherwise, it will put a 1.
 
+### GIF Proyect ###
+
+<img src="https://media.giphy.com/media/dCRmnMyonKjZpngps0/giphy.gif" width=400>
+
 ### Link app
 
 https://rent-amount-brazilian.shinyapps.io/rent-amount-brazil/?_ga=2.164743551.1321010361.1654635459-579550788.1654635459
