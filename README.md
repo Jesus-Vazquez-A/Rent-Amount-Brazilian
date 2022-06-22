@@ -22,7 +22,7 @@ The city variable is 1 when the house is in a metropolis. Otherwise, it will put
 
 ### GIF Proyect ###
 
-<img src="https://media.giphy.com/media/dCRmnMyonKjZpngps0/giphy.gif" width=400>
+<img src="https://media.giphy.com/media/dCRmnMyonKjZpngps0/giphy.gif" width=600>
 
 ### Link app
 
