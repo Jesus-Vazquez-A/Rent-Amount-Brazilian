@@ -3,18 +3,12 @@
 library(shiny)
 library(dplyr)
 library(glmnet)
-library(curl)
-
-
-dir_mkdir<-"C:\\Users\\PC\\Desktop\\Ciencias de datos\\Proyectos\\Casa de renta\\"
-setwd(dir_mkdir)
 
 
 
-url_data<-"https://raw.githubusercontent.com/Jesus-Vazquez-A/Casa-de-Renta/master/rent-amount-clear.csv"
-url_data<-url(url_data)
 
-old_data<-read.csv(url_data) # load old data
+
+old_data<-read.csv("rent-amount-clear.csv") # load old data
 
 
 model<-readRDS("lm_ridge_rent.RDS") # load model
