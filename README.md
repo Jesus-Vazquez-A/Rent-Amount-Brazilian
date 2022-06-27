@@ -26,4 +26,4 @@ The city variable is 1 when the house is in a metropolis. Otherwise, it will put
 
 ### Link app
 
-https://rent-amount-brazilian.shinyapps.io/rent-amount-brazil/?_ga=2.164743551.1321010361.1654635459-579550788.1654635459
+https://rent-amount-brazilian.shinyapps.io/Rent-Amount/
