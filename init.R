@@ -1,4 +1,4 @@
-my_packages = c("package_name_1", "package_name_2", ...)
+my_packages = c("dplyr", "shiny","glmnet")
 install_if_missing = function(p) {
 if (p %in% rownames(installed.packages()) == FALSE) {
 install.packages(p)
