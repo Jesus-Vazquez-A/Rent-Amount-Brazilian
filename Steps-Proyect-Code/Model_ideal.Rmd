@@ -1,0 +1,151 @@
+---
+title: "Model Ideal"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+## **Load Libraries**
+
+```{r message=FALSE, warning=FALSE}
+library(glmnet) # create model
+library(caret) # ml library
+library(tidyverse) # common libraries
+```
+
+
+## **Load Data**
+
+
+```{r message=FALSE, warning=FALSE}
+df<-read.csv("rent-amount-clear-preprocesing.csv")
+```
+
+
+```{r message=FALSE, warning=FALSE}
+attach(df)
+```
+
+
+
+
+
+### **Split Data**
+
+```{r message=FALSE, warning=FALSE}
+set.seed(2018) # random state
+
+training.ids<-createDataPartition(rent.amount,p=0.7,list = F)
+
+train_data<-df[training.ids,] # select train data index
+test_data<-df[-training.ids,] # select test data index
+```
+
+```{r}
+X_train<- train_data %>% select(-rent.amount)
+X_train<-as.matrix(X_train)# transform to matrix
+Y_train<-train_data$rent.amount
+
+
+X_test<- test_data %>% select(-rent.amount)
+X_test<-as.matrix(X_test) # transform to matrix
+Y_test<-test_data$rent.amount
+```
+
+
+## **Model Creation**
+
+```{r}
+lm_ridge<-glmnet(x=X_train,y=Y_train,alpha = 0.01,lambda = 0.001)
+```
+
+We assign the same parameters of the best model, which we had previously estimated.
+
+
+```{r}
+predict_model<-function(data){
+  
+  y_pred<-predict(lm_ridge,newx =data)
+  y_pred<-as.vector(y_pred)
+}
+```
+
+
+```{r}
+pred_train<-predict_model(X_train)
+pred_test<-predict_model(X_test)
+```
+
+```{r}
+train_data<- train_data %>% mutate(predictions=pred_train)
+
+test_data<- test_data %>% mutate(predictions=pred_test)
+```
+
+
+### **MSE**
+
+
+Measures the average error between the predicted value and the original.
+
+#### **Train**
+
+```{r}
+train_data %>% summarise(mse=RMSE(predictions,rent.amount))
+```
+
+#### **Test**
+
+
+```{r}
+test_data %>% summarise(mse=RMSE(predictions,rent.amount))
+```
+#### **R²**
+
+It measures the degree of fit of the model. The higher the value, the better the model fit.
+
+
+```{r}
+train_data %>% summarise(mse=R2(predictions,rent.amount))
+```
+
+```{r}
+test_data %>% summarise(mse=R2(predictions,rent.amount))
+```
+
+Both metrics are very similar. Therefore, it indicates that our model is not overtrained. This means that the model is only good for the training data but it is unable to generalize with new data that it has never seen.
+
+
+### **Exponential transformation**
+
+```{r}
+test_data<-test_data %>%
+  
+  mutate(rent.amount=exp(rent.amount)) %>%
+  
+  mutate(predictions=exp(predictions))
+```
+
+
+
+Let us remember that the rent.amount variable is in logarithmic scale and we perform the exponential transformation because it is its opposite operation.
+```{r}
+test_data %>% 
+  ggplot(aes(x=rent.amount,y=predictions))+
+  geom_point(color="green",alpha=0.15) +
+  geom_abline(intercept = 0,slope = 1,color="red",lwd=2) +
+  theme_bw() +
+  labs(title = "True Values vs Predicted Values",
+       x="True values",y="Predicted Values")
+```
+
+```{r}
+test_data %>% select(rent.amount,predictions) %>% head(50)
+```
+In most predictions, it gives predictions very close to the original value.
+
+### **Save Model**
+
+```{r}
+saveRDS(lm_ridge,"lm_ridge_rent.RDS")
+```

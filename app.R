@@ -8,6 +8,8 @@ library(glmnet)
 
 
 
+
+
 old_data<-read.csv("rent-amount-clear.csv") # load old data
 
 
