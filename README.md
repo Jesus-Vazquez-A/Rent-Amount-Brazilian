@@ -103,10 +103,17 @@ We decided to apply an L1 penalty method which is another variant of linear regr
 This method is used when we know that all the variables are going to serve us and are correlated.
 
 
+Through a cross-validation technique that serves to see the average generalization of the model. To find the best set of parameters for our data.
+
+* **alpha:** The closer the value is to 1, the greater the L1 penelazation effect.
+
+
 ### **Cross Validation**
 
 
 ![cv](https://user-images.githubusercontent.com/85312561/177008327-c49f35b2-e788-452c-a821-84f7540f4c71.png)
+
+
 
 
 
