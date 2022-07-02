@@ -29,6 +29,12 @@ All the variables that refer to a certain price are in the Brazilian peso unit.
 
 * Rent Amount: Rental Price
 
+### **Scatter Plots**
+
+
+![Uploading scatter_plots.png…]()
+
+
 
 ### **Rent Amount**
 
@@ -47,6 +53,17 @@ All the variables that refer to a certain price are in the Brazilian peso unit.
 
 
 ![area](https://user-images.githubusercontent.com/85312561/177007292-30f0b135-a411-44bc-a7a9-165f70129ab7.png)
+
+
+We note that the continuous variables have an important presence of atypical values, that is, values that are out of the normal.
+
+The main challenge will be to find a method that is effective in transforming these values. Since we cannot eliminate them since we risk the loss of useful information.
+
+
+### **Conclusion**
+
+
+
 
 ## **Summary**
 
