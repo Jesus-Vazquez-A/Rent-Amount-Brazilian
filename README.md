@@ -5,6 +5,10 @@
 Using the programming language R. We solve a regression problem, that is, to predict the price of a rental house in Brazil.
 Based on the following attributes.
 
+## Definition of problem.
+
+All the variables that refer to a certain price are in the Brazilian peso unit.
+
 * City: If the department is in a city.
 
 * Animal: If they accept animals.
@@ -23,18 +27,26 @@ Based on the following attributes.
 
 * Parking Spaces: Number of parking spaces.
 
+* Rent Amount: Rental Price
 
-## Project steps
 
-* EDA: It consists of understanding the nature of the data.
+### **Rent Amount**
 
-* Feature Engineering: Consists of removing or replacing missing values or outliers, as well as creating new attributes in the dataset.
+![rent_amount](https://user-images.githubusercontent.com/85312561/177007284-b334465d-f385-4054-a132-fd29fe97703d.png)
 
-* Selection Model: It consists of finding the best model or the best parameters, which adapt to the set of data.
 
-* Definitive Model: We create the best model with the same parameters.
 
-* App: We create an interactive application using the model, to generate new predictions.
+
+#### **Fire Insurence**
+
+
+![fire_insurence](https://user-images.githubusercontent.com/85312561/177007288-fa32b274-0846-458a-975c-ad3b85e1e728.png)
+
+
+### **Area**
+
+
+![area](https://user-images.githubusercontent.com/85312561/177007292-30f0b135-a411-44bc-a7a9-165f70129ab7.png)
 
 ## **Summary**
 
