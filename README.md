@@ -1,6 +1,11 @@
 # **Predict rent amount**
 
 
+![casa-y-para-el-dibujo-y-la-foto-de-la-muestra-de-la-venta-en-blanco-50582607](https://user-images.githubusercontent.com/85312561/177014516-25b3961d-effe-4b10-b7ca-ec6d167e7b37.jpg)
+
+
+
+
 ### **How much will the rental price cost?**
 Using the programming language R. We solve a regression problem, that is, to predict the price of a rental house in Brazil.
 Based on the following attributes.
@@ -120,10 +125,17 @@ Through a cross-validation technique that serves to see the average generalizati
 ![coeficients](https://user-images.githubusercontent.com/85312561/177014276-c6e9b2c3-8325-479c-a63f-0689093408d8.png)
 
 
+### **Model Visualization**
 
-**Note**
 
-We save the project steps in PDF format.
+![model](https://user-images.githubusercontent.com/85312561/177014385-8e206ddd-081c-412d-806a-bf3bcea121c9.png)
+
+
+
+## **Conclusion**
+
+The linear model in its L1 variant perfectly solves the problem. It adapts very well to the unknown data set, it is easy to interpret. Instead of using other more complex algorithms like artificial neural networks or support vector machines.
+
 
 ### GIF Proyect ###
 
