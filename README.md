@@ -1,9 +1,9 @@
 # **Predict rent amount**
 
 
-![casa-y-para-el-dibujo-y-la-foto-de-la-muestra-de-la-venta-en-blanco-50582607](https://user-images.githubusercontent.com/85312561/177014516-25b3961d-effe-4b10-b7ca-ec6d167e7b37.jpg)
 
 
+![casa-y-para-el-dibujo-y-la-foto-de-la-muestra-de-la-venta-en-blanco-50582607](https://user-images.githubusercontent.com/85312561/177014534-ae7bb450-343f-409b-8d8a-5d6ba14186ce.jpg)
 
 
 ### **How much will the rental price cost?**
