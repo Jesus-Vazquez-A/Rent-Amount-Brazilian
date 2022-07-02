@@ -94,6 +94,22 @@ We compute several possible confidence intervals. Through these calculations, we
 
 Subsequently, we performed a logarithmic transformation, to improve the distribution of the data.Unlike the previous Python project where our definitive algorithm was an XGBoost, in this case we have to preprocess the data.
 
+
+## **Model Interpration**
+
+
+We decided to apply an L1 penalty method which is another variant of linear regression. With the difference of minimizing the weight of the coefficient for those variables that do add value, but not as much as if we compare it with other variables.
+
+This method is used when we know that all the variables are going to serve us and are correlated.
+
+
+### **Cross Validation**
+
+
+![cv](https://user-images.githubusercontent.com/85312561/177008327-c49f35b2-e788-452c-a821-84f7540f4c71.png)
+
+
+
 **Note**
 
 We save the project steps in PDF format.
