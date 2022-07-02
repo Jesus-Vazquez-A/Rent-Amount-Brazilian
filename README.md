@@ -35,6 +35,11 @@ All the variables that refer to a certain price are in the Brazilian peso unit.
 ![scatter_plots](https://user-images.githubusercontent.com/85312561/177007535-63d0c903-b94b-4abd-b7c3-fcd6869cf9b2.png)
 
 
+All the variables positively affect the price of the rental house, something that makes a lot of sense.
+
+Especially the variable of fire protection, increases proportionally to the price of the rent. That is, it maintains a linear trend relationship.
+
+The variable area is not seen to have a strong relationship, because it contains many values that are out of the established.
 
 
 ### **Rent Amount**
@@ -58,10 +63,13 @@ All the variables that refer to a certain price are in the Brazilian peso unit.
 
 We note that the continuous variables have an important presence of atypical values, that is, values that are out of the normal.
 
-The main challenge will be to find a method that is effective in transforming these values. Since we cannot eliminate them since we risk the loss of useful information.
 
 
 ### **Conclusion**
+
+
+The main challenge will be to find a method that is effective in transforming these values. Since we cannot eliminate them since we risk the loss of useful information,there is especially a high risk for the variable area, which affects the distribution of the data.
+
 
 
 
