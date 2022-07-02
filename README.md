@@ -114,6 +114,10 @@ Through a cross-validation technique that serves to see the average generalizati
 ![cv](https://user-images.githubusercontent.com/85312561/177008327-c49f35b2-e788-452c-a821-84f7540f4c71.png)
 
 
+### **Opening the black box..**
+
+
+![coeficients](https://user-images.githubusercontent.com/85312561/177014276-c6e9b2c3-8325-479c-a63f-0689093408d8.png)
 
 
 
