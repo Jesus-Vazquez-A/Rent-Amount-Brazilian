@@ -74,29 +74,25 @@ The main challenge will be to find a method that is effective in transforming th
 
 
 
-## **Summary**
+# **Proyect Summary**
 
-We load the dataset. We realized that some continuous variables. R recognizes them as an object type, because these variables contain special characters. Therefore we had to remove these characters.
-
-We transform them and coinvert them to values of the numeric type. We found that the dataset contains a significant number of outliers.
+## **Aprobach**
 
 
-In the feature engineering section for values with outliers. We replace these values by those data, which are in a more normal range.
+### **Treatment of outliers**
 
-For variables such as area, firm insurance and rent amount. We had to perform a logarithmic transformation of the data. To improve data distribution.
-
-
-In the data selection part, we decided to use ridge regression, which is a variant of linear regression. We decided to use it because the variables have a strong correlation between the variable to be predicted. In addition, the ridge regression minimizes the weight of the coefficient for those variables that are not so significant, but add value to the prediction quality.
-
-Since if we only use the variables that are not so significant, we may not have such an accurate prediction. This factor is what differentiates us between humans and algorithms. While only humans rely on variables that are important, algorithms use these variables but complement them with other variables where they find patterns that influence prediction.
-
-Before creating the model we had to perform a scale adjustment. With the aim that the variables are comparable to each other.
-Using liberia caret we use it to find the best combination of parameters.
+![rent_log](https://user-images.githubusercontent.com/85312561/177007896-4c2aa0fe-2a40-4b85-b831-9fb24e7ae00b.png)
 
 
-As the penultimate step. We recreate the best model and save it as the trained model.
+![fire_log](https://user-images.githubusercontent.com/85312561/177007902-bebbf716-f954-4ba0-8c2b-9584b808123e.png)
 
-Finally we use the shiny library to create an interactive application for the user. We use the previously trained model, with the purpose of making new predictions. Based on the data entered by the user.
+
+![area_log](https://user-images.githubusercontent.com/85312561/177007908-81b1741c-146f-4e55-8dac-3e307d60efc4.png)
+
+
+We compute several possible confidence intervals. Through these calculations, we identify which values are out of the established. We replace these values with a random sample of values close to the upper interval.
+
+Subsequently, we performed a logarithmic transformation, to improve the distribution of the data.Unlike the previous Python project where our definitive algorithm was an XGBoost, in this case we have to preprocess the data.
 
 **Note**
 
