@@ -32,7 +32,8 @@ All the variables that refer to a certain price are in the Brazilian peso unit.
 ### **Scatter Plots**
 
 
-![Uploading scatter_plots.png…]()
+![scatter_plots](https://user-images.githubusercontent.com/85312561/177007535-63d0c903-b94b-4abd-b7c3-fcd6869cf9b2.png)
+
 
 
 
