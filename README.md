@@ -2,8 +2,9 @@
 
 
 
+![casa-y-para-el-dibujo-y-la-foto-de-la-muestra-de-la-venta-en-blanco-50582607](https://user-images.githubusercontent.com/85312561/177014554-258a5bf5-24ca-4f40-8a09-28cf50b39a67.jpg)
 
-![casa-y-para-el-dibujo-y-la-foto-de-la-muestra-de-la-venta-en-blanco-50582607](https://user-images.githubusercontent.com/85312561/177014534-ae7bb450-343f-409b-8d8a-5d6ba14186ce.jpg)
+
 
 
 ### **How much will the rental price cost?**
