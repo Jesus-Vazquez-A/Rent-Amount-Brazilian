@@ -102,15 +102,8 @@ Subsequently, we performed a logarithmic transformation, to improve the distribu
 
 ## **Model Interpration**
 
+<img src="https://aegis4048.github.io/images/featured_images/multiple_linear_regression_and_visualization.png"/>
 
-We decided to apply an L1 penalty method which is another variant of linear regression. With the difference of minimizing the weight of the coefficient for those variables that do add value, but not as much as if we compare it with other variables.
-
-This method is used when we know that all the variables are going to serve us and are correlated.
-
-
-Through a cross-validation technique that serves to see the average generalization of the model. To find the best set of parameters for our data.
-
-* **alpha:** The closer the value is to 1, the greater the L1 penelazation effect.
 
 
 ### **Cross Validation**
