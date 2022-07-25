@@ -111,19 +111,22 @@ Multiple Linear Regression consists of finding the best hyperplane, which consis
 ### **Cross Validation**
 
 
-![cv](https://user-images.githubusercontent.com/85312561/177008327-c49f35b2-e788-452c-a821-84f7540f4c71.png)
+![cv](https://user-images.githubusercontent.com/85312561/180853822-8e2372ca-6a39-45e3-b698-9e76024d575f.png)
+
+
 
 
 ### **Opening the black box..**
 
+![coef](https://user-images.githubusercontent.com/85312561/180853751-81bcdd4f-9639-4378-ad44-f45614b04df8.png)
 
-![coeficients](https://user-images.githubusercontent.com/85312561/177014276-c6e9b2c3-8325-479c-a63f-0689093408d8.png)
+
 
 
 ### **Model Visualization**
 
 
-![model](https://user-images.githubusercontent.com/85312561/177014385-8e206ddd-081c-412d-806a-bf3bcea121c9.png)
+![lm](https://user-images.githubusercontent.com/85312561/180853780-e695f430-c267-42ae-9dfe-b766ea13add6.png)
 
 
 
