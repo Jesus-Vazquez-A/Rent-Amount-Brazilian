@@ -144,4 +144,4 @@ The linear model in its L1 variant perfectly solves the problem. It adapts very 
 
 ### Link app
 
-https://rent-amount-brazilian.shinyapps.io/Rent-Amount/
+ https://rent-amount-brazilian.shinyapps.io/Rent-Amount-Brazil/
