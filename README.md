@@ -121,6 +121,7 @@ Multiple Linear Regression consists of finding the best hyperplane, which consis
 ![coef](https://user-images.githubusercontent.com/85312561/180853751-81bcdd4f-9639-4378-ad44-f45614b04df8.png)
 
 
+Coefficients determined by the model.
 
 
 ### **Model Visualization**
