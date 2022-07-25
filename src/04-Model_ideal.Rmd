@@ -12,9 +12,8 @@ output:
 
 
 ```{r message=FALSE, warning=FALSE}
-library(glmnet) # create model
-library(caret) # ml library
 library(tidyverse) # common libraries
+library(caret)
 ```
 
 
@@ -24,14 +23,18 @@ library(tidyverse) # common libraries
 
 
 ```{r message=FALSE, warning=FALSE}
-df<-read.csv("rent-amount-clear-preprocesing.csv")
+df<-read.csv("rent-amount-brazil-clear.csv")
 ```
 
 
 
 
-```{r message=FALSE, warning=FALSE}
-attach(df)
+
+
+
+
+```{r}
+df<-df %>% mutate(furniture=ifelse(furniture=="furnished",1,0))
 ```
 
 
@@ -44,25 +47,11 @@ attach(df)
 ```{r message=FALSE, warning=FALSE}
 set.seed(2018) # random state
 
-training.ids<-createDataPartition(rent.amount,p=0.7,list = F)
+training.ids<-createDataPartition(df$rent.amount,p=0.7,list=F)
 
-train_data<-df[training.ids,] # select train data index
-test_data<-df[-training.ids,] # select test data index
+train_data<-df[training.ids,]
+test_data<- df[-training.ids,]
 ```
-
-
-
-```{r}
-X_train<- train_data %>% select(-rent.amount)
-X_train<-as.matrix(X_train)# transform to matrix
-Y_train<-train_data$rent.amount
-
-
-X_test<- test_data %>% select(-rent.amount)
-X_test<-as.matrix(X_test) # transform to matrix
-Y_test<-test_data$rent.amount
-```
-
 
 
 
@@ -70,39 +59,8 @@ Y_test<-test_data$rent.amount
 
 
 ```{r}
-lm_ridge<-glmnet(x=X_train,y=Y_train,alpha = 0.1,lambda = 0.001)
+lm<-lm(rent.amount~.,data=train_data)
 ```
-
-
-
-We assign the same parameters of the best model, which we had previously estimated.
-
-
-
-```{r}
-predict_model<-function(data){
-  
-  y_pred<-predict(lm_ridge,newx =data)
-  y_pred<-as.vector(y_pred)
-}
-```
-
-
-
-
-```{r}
-pred_train<-predict_model(X_train)
-pred_test<-predict_model(X_test)
-```
-
-
-
-```{r}
-train_data<- train_data %>% mutate(predictions=pred_train)
-
-test_data<- test_data %>% mutate(predictions=pred_test)
-```
-
 
 
 ### **MSE**
@@ -110,25 +68,6 @@ test_data<- test_data %>% mutate(predictions=pred_test)
 
 
 Measures the average error between the predicted value and the original.
-
-
-
-#### **Train**
-
-
-
-```{r}
-train_data %>% summarise(mse=RMSE(predictions,rent.amount))
-```
-
-
-
-#### **Test**
-
-
-```{r}
-test_data %>% summarise(mse=RMSE(predictions,rent.amount))
-```
 
 
 #### **R²**
@@ -141,18 +80,41 @@ It measures the degree of fit of the model. The higher the value, the better the
 
 
 ```{r}
-train_data %>% summarise(mse=R2(predictions,rent.amount))
+summary(lm)
 ```
+
+The model has a good fit to the data. It can explain 96% of the cases, which can generalize very well.
 
 
 ```{r}
-test_data %>% summarise(mse=R2(predictions,rent.amount))
+y_pred_test<-predict(lm,newdata = test_data)
+```
+
+```{r}
+test_data<-test_data %>% mutate(y_pred=y_pred_test)
 ```
 
 
 
-Both metrics are very similar. Therefore, it indicates that our model is not overtrained. This means that the model is only good for the training data but it is unable to generalize with new data that it has never seen.
 
+
+
+
+```{r}
+test_data %>% summarise(rmse=RMSE(y_pred,rent.amount))
+```
+
+
+
+
+
+```{r}
+test_data %>% summarise(mse=R2(y_pred,rent.amount))
+```
+
+
+
+It has similar metrics with the training data, indicating that it's not just good for the data it was trained on. If not, it is also suitable, for values that I have never seen.
 
 
 
@@ -165,7 +127,7 @@ test_data<-test_data %>%
   
   mutate(rent.amount=exp(rent.amount)) %>%
   
-  mutate(predictions=exp(predictions))
+  mutate(predictions=exp(y_pred))
 ```
 
 
@@ -177,15 +139,11 @@ Let us remember that the rent.amount variable is in logarithmic scale and we per
 
 
 ```{r}
-coef(lm_ridge)
+coef(lm)
 ```
 
 
-
-We previously knew that the health insurance charge variable. It had a great relationship with respect to the rental price, which I assign the highest coefficient.
-
-
-To the other complementary variables that add value, I minimize the weight of the coefficient as we had previously explained.
+Coefficients determined by the Linear Regression model.
 
 
 
@@ -200,7 +158,7 @@ test_data %>%
 ```
 
 ```{r}
-test_data %>% select(rent.amount,predictions) %>% head(50)
+test_data %>% select(rent.amount,predictions) %>% head(20)
 ```
 
 
@@ -211,5 +169,5 @@ In most predictions, it gives predictions very close to the original value.
 ### **Save Model**
 
 ```{r}
-saveRDS(lm_ridge,"lm_ridge_rent.RDS")
+saveRDS(lm,"lm_rent_amount.RDS")
 ```
