@@ -15,9 +15,6 @@ Based on the following attributes.
 
 All the variables that refer to a certain price are in the Brazilian peso unit.
 
-* City: If the department is in a city.
-
-* Animal: If they accept animals.
 
 * Furniture: If the house is furnished.
 
@@ -32,6 +29,8 @@ All the variables that refer to a certain price are in the Brazilian peso unit.
 * Floor: Number of floors of the apartment building.
 
 * Parking Spaces: Number of parking spaces.
+
+* Quality Departament: Department quality.
 
 * Rent Amount: Rental Price
 
