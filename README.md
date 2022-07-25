@@ -105,6 +105,8 @@ Subsequently, we performed a logarithmic transformation, to improve the distribu
 <img src="https://aegis4048.github.io/images/featured_images/multiple_linear_regression_and_visualization.png"/>
 
 
+Multiple Linear Regression consists of finding the best hyperplane, which consists of finding the best hyperplane that fits the data. Since we are using more than two variables, otherwise it will be a Simple Linear Regression. Since it would consist of finding the best straight line that covers most of the data set.
+
 
 ### **Cross Validation**
 
