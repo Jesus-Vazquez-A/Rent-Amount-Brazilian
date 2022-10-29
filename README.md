@@ -66,7 +66,7 @@ The variable area is not seen to have a strong relationship, because it contains
 ![area](https://user-images.githubusercontent.com/85312561/177007292-30f0b135-a411-44bc-a7a9-165f70129ab7.png)
 
 
-We note that the continuous variables have an important presence of atypical values, that is, values that are out of the normal.
+Note that continuous variables have a significant presence of outliers, that is, values that are out of the norm.
 
 
 
@@ -94,10 +94,11 @@ The main challenge will be to find a method that is effective in transforming th
 
 ![area_log](https://user-images.githubusercontent.com/85312561/177007908-81b1741c-146f-4e55-8dac-3e307d60efc4.png)
 
+Create a function to compute several possible confidence intervals. Through these calculations, we identify which values are out of bounds. We replace these values **with a random sample of values** close to the upper interval.
 
-We compute several possible confidence intervals. Through these calculations, we identify which values are out of the established. We replace these values with a random sample of values close to the upper interval.
 
-Subsequently, we performed a logarithmic transformation, to improve the distribution of the data.Unlike the previous Python project where our definitive algorithm was an XGBoost, in this case we have to preprocess the data.
+
+Subsequently, apply a logarithmic transformation, to improve the distribution of the data. Unlike the previous Python project where our final algorithm was an XGBoost, in this case I had to perform a transformation on the data.
 
 
 ## **Model Interpration**
